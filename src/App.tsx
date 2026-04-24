@@ -52,7 +52,6 @@ export const App: React.FC = () => {
 
       <div className="form-group row">
         <div className="col-3 col-sm-2 col-xl-1">
-
           {/* важливо! оновленя двох параметрів  */}
           <select
             data-cy="perPageSelector"
@@ -81,8 +80,11 @@ export const App: React.FC = () => {
       </div>
 
       <Pagination
-        pages={pages}
-        updateParams={updateParams}
+        total={items.length}
+        perPage={Number(perPage)}
+        onPageChange={newPAge => {
+          updateParams('page', String(newPAge));
+        }}
         page={page}
         handlePgeChange={handlePgeChange}
         lastPage={lastPage}

@@ -2,22 +2,27 @@ import classNames from 'classnames';
 import React from 'react';
 
 type Props = {
-  pages: number[];
+  total: number;
+  perPage: number;
   page: string;
-  updateParams: (key: string, value: string) => void;
+  onPageChange: (page: number) => void;
   handlePgeChange: (value: number) => void;
   lastPage: boolean;
   currentPage: number;
 };
 
 export const Pagination: React.FC<Props> = ({
-  pages,
+  total,
+  perPage,
   page,
-  updateParams,
+  onPageChange,
   handlePgeChange,
   lastPage,
   currentPage,
 }) => {
+  const totalPage = Math.ceil(total / perPage);
+  const pages = Array.from({ length: totalPage }, (__dirname, i) => i + 1);
+
   return (
     <ul className="pagination">
       <li
@@ -56,7 +61,7 @@ export const Pagination: React.FC<Props> = ({
               href={`#${pageNumber}`}
               onClick={e => {
                 e.preventDefault();
-                updateParams('page', String(pageNumber));
+                onPageChange(pageNumber);
               }}
             >
               {pageNumber}
