@@ -13,33 +13,18 @@ export const App: React.FC = () => {
     page: '1',
   });
 
-  const pages: number[] = [];
-
   const page = searchParams.get('page') || '1';
   const perPage = searchParams.get('perPage') || '5';
-
-  const totalPage = Math.ceil(items.length / Number(perPage));
   const currentPage = Number(page);
-  const lastPage = currentPage === totalPage;
 
   const startIndex = (currentPage - 1) * Number(perPage);
   const endIndex = Math.min(Number(perPage) + startIndex, items.length);
-
-  for (let i = 1; i <= totalPage; i++) {
-    pages.push(i);
-  }
 
   const updateParams = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams);
 
     params.set(key, value);
     setSearchParams(params);
-  };
-
-  const handlePgeChange = (newPage: number) => {
-    if (newPage !== currentPage) {
-      updateParams('page', String(newPage));
-    }
   };
 
   return (
@@ -85,9 +70,6 @@ export const App: React.FC = () => {
         onPageChange={newPAge => {
           updateParams('page', String(newPAge));
         }}
-        page={page}
-        handlePgeChange={handlePgeChange}
-        lastPage={lastPage}
         currentPage={currentPage}
       />
 
