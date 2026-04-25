@@ -18,6 +18,10 @@ export const Pagination: React.FC<Props> = ({
   const pages = Array.from({ length: totalPage }, (__dirname, i) => i + 1);
   const lastPage = currentPage === totalPage;
 
+  const handleChange = (pageNumber: number) => {
+    onPageChange(pageNumber);
+  };
+
   return (
     <ul className="pagination">
       <li
@@ -32,8 +36,9 @@ export const Pagination: React.FC<Props> = ({
           aria-disabled={currentPage === 1 ? 'true' : 'false'}
           onClick={e => {
             e.preventDefault();
+
             if (currentPage > 1) {
-              onPageChange(currentPage - 1);
+              handleChange(currentPage - 1);
             }
           }}
         >
@@ -55,7 +60,8 @@ export const Pagination: React.FC<Props> = ({
               href={`#${pageNumber}`}
               onClick={e => {
                 e.preventDefault();
-                onPageChange(pageNumber);
+
+                handleChange(pageNumber);
               }}
             >
               {pageNumber}
@@ -77,7 +83,7 @@ export const Pagination: React.FC<Props> = ({
             e.preventDefault();
 
             if (!lastPage) {
-              onPageChange(currentPage + 1);
+              handleChange(currentPage + 1);
             }
           }}
         >
