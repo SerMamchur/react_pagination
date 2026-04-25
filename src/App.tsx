@@ -67,8 +67,8 @@ export const App: React.FC = () => {
       <Pagination
         total={items.length}
         perPage={Number(perPage)}
-        onPageChange={newPAge => {
-          updateParams('page', String(newPAge));
+        onPageChange={newPage => {
+          updateParams('page', String(newPage));
         }}
         currentPage={currentPage}
       />

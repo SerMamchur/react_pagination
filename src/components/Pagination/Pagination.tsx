@@ -16,7 +16,6 @@ export const Pagination: React.FC<Props> = ({
 }) => {
   const totalPage = Math.ceil(total / perPage);
   const pages = Array.from({ length: totalPage }, (__dirname, i) => i + 1);
-  const page = String(currentPage);
   const lastPage = currentPage === totalPage;
 
   return (
@@ -45,9 +44,8 @@ export const Pagination: React.FC<Props> = ({
       {pages.map(pageNumber => {
         return (
           <li
-            value={page}
             className={classNames('page-item', {
-              active: Number(page) === pageNumber,
+              active: currentPage === pageNumber,
             })}
             key={pageNumber}
           >
